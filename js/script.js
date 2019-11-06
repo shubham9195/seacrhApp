@@ -61,7 +61,7 @@ async function search(query, pageCount) {
                 text.className = 'data';
                 let image = document.createElement('img');
                 image.className = 'img';
-                text.innerHTML = `<a class= "link" href=${item.url}>${item.title}</a>`;
+                text.innerHTML = `<a target="_blank" class= "link" href=${item.url}>${item.title}</a>`;
                 if (item.urlToImage !== null) {
                     image.src = item.urlToImage;
                     image.width = 100
@@ -90,7 +90,7 @@ async function search(query, pageCount) {
 async function getData(query, pageCount) {
     try {
         apiRequesting = true;
-        const apiData = await fetch(`https://newsapi.org/v2/everything?q=${query}&apiKey=363d26dd3d664d199ca63adc371e22aa&pageSize=10&page=${pageCount}`)
+        const apiData = await fetch(`https://newsapi.org/v2/everything?q=${query}&apiKey=44c1f90dde454be693c048b711c354dc&pageSize=10&page=${pageCount}`)
         return apiData.json();
     } catch (err) {
         console.log('Error in api request', err);

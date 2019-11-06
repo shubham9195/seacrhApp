@@ -26,7 +26,7 @@ function refreshFunc(stop) {
     window.interval = interval;
 }
 function createQuery() {
-     const searchinput = document.getElementById('searchBar')
+const searchinput = document.getElementById('searchBar')
     var query = searchinput.value
     searchinput.addEventListener("keyup", function(event) {
         if (event.keyCode === 13) {

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <div class="mainBody">
+        <h2 style="text-align: center">Latest News Search</h2>
+
+        <div class="card-body">
+            <P id="timer" class="timer"></P>
+            <div class="search-table">
+                <div class="search-bar">
+                    <input id="searchBar" type="text" class="input">
+                </div>
+                <div>
+                    <button style="background-color: green;color: #fff;height:30px;border: none"
+                        onclick="createQuery()">Search</button>
+                </div>
+            </div>
+            <div>
+                <div class="container">
+                    <div class="row">
+                        <div class="img" id="imgList">
+
+                        </div>
+                        <p class="data" id="demo">
+                            <br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div id="skeleton-loader">
+                <ul class="o-vertical-spacing o-vertical-spacing--l">
+                    <li class="blog-post o-media">
+                        <div class="o-media__figure">
+                            <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                        </div>
+                        <div class="o-media__body">
+                            <div class="o-vertical-spacing">
+                                <h3 class="blog-post__headline">
+                                    <span class="skeleton-box" style="width:55%;"></span>
+                                </h3>
+                                <p>
+                                    <span class="skeleton-box" style="width:80%;"></span>
+                                    <span class="skeleton-box" style="width:90%;"></span>
+                                    <span class="skeleton-box" style="width:83%;"></span>
+                                    <span class="skeleton-box" style="width:80%;"></span>
+                                </p>
+                                <div class="blog-post__meta">
+                                    <span class="skeleton-box" style="width:70px;"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="blog-post o-media">
+                        <div class="o-media__figure">
+                            <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                        </div>
+                        <div class="o-media__body">
+                            <div class="o-vertical-spacing">
+                                <h3 class="blog-post__headline">
+                                    <span class="skeleton-box" style="width:55%;"></span>
+                                </h3>
+                                <p>
+                                    <span class="skeleton-box" style="width:80%;"></span>
+                                    <span class="skeleton-box" style="width:90%;"></span>
+                                    <span class="skeleton-box" style="width:83%;"></span>
+                                    <span class="skeleton-box" style="width:80%;"></span>
+                                </p>
+                                <div class="blog-post__meta">
+                                    <span class="skeleton-box" style="width:70px;"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="blog-post o-media">
+                        <div class="o-media__figure">
+                            <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                        </div>
+                        <div class="o-media__body">
+                            <div class="o-vertical-spacing">
+                                <h3 class="blog-post__headline">
+                                    <span class="skeleton-box" style="width:55%;"></span>
+                                </h3>
+                                <p>
+                                    <span class="skeleton-box" style="width:80%;"></span>
+                                    <span class="skeleton-box" style="width:90%;"></span>
+                                    <span class="skeleton-box" style="width:83%;"></span>
+                                    <span class="skeleton-box" style="width:80%;"></span>
+                                </p>
+                                <div class="blog-post__meta">
+                                    <span class="skeleton-box" style="width:70px;"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="./js/script.js"></script>
+
+</body>
+
+</html>

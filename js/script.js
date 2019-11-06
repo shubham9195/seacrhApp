@@ -5,6 +5,8 @@ let refresh;
 let searched;
 let pageCount = 1;
 let apiRequesting = false;
+var apiDataArticle
+var query
 function countdown() {
     if (timeLeft == -1) {
         clearTimeout(timerId);
@@ -24,11 +26,18 @@ function refreshFunc(stop) {
     window.interval = interval;
 }
 function createQuery() {
-    var query = document.getElementById('searchBar').value
+     const searchinput = document.getElementById('searchBar')
+    var query = searchinput.value
+    searchinput.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+         document.getElementById("search").click();
+        }
+      });
     searched = true;
 
     console.log('dco', query);
     if (query) {
+        
         console.log('refresh',refresh, !refresh);
         if (!refresh) {
             refreshFunc();
@@ -37,13 +46,16 @@ function createQuery() {
     }
 }
 async function search(query, pageCount) {
+    // document.getElementById('containerData').innerHTML=""
     var container = document.getElementById('imgList');
+    container.innerHTML=""
     const loader = document.querySelector('#demo');
     const skeleton = document.querySelector('#skeleton-loader');
     try {
         skeleton.style.display = 'block';
         loader.appendChild(skeleton);
-        const apiData = await getData(query, pageCount);
+        var apiData = await getData(query, pageCount);
+         apiDataArticle = apiData
         apiRequesting = false;
         skeleton.style.display = 'none';
         loader.style.display = 'none';
@@ -69,10 +81,9 @@ async function search(query, pageCount) {
                 }
                 else {
                     // var image = document.createElement('image');
-                    image.src = 'http://static1.squarespace.com/static/582f2a75414fb5c5d7172211/t/5ba29eacb8a045e82a32378a/1537384155646/blank-thumbnail.jpg?format=1500w'
-                        ;
-                    image.width = 100
-                    image.height = 50
+                image.src = 'http://static1.squarespace.com/static/582f2a75414fb5c5d7172211/t/5ba29eacb8a045e82a32378a/1537384155646/blank-thumbnail.jpg?format=1500w';
+                image.width = 100
+                image.height = 50
                 }
                 row.appendChild(image);
                 row.appendChild(text);
@@ -90,8 +101,9 @@ async function search(query, pageCount) {
 async function getData(query, pageCount) {
     try {
         apiRequesting = true;
-        const apiData = await fetch(`https://newsapi.org/v2/everything?q=${query}&apiKey=44c1f90dde454be693c048b711c354dc&pageSize=10&page=${pageCount}`)
+        var apiData = await fetch(`https://newsapi.org/v2/everything?q=${query}&apiKey=44c1f90dde454be693c048b711c354dc&pageSize=10&page=${pageCount}`)
         return apiData.json();
+        
     } catch (err) {
         console.log('Error in api request', err);
     }

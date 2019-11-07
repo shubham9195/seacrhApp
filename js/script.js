@@ -26,36 +26,33 @@ function refreshFunc(stop) {
     window.interval = interval;
 }
 function createQuery() {
-const searchinput = document.getElementById('searchBar')
+    const searchinput = document.getElementById('searchBar')
     var query = searchinput.value
-    searchinput.addEventListener("keyup", function(event) {
+    searchinput.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
-         document.getElementById("search").click();
+            document.getElementById("search").onclick();
         }
-      });
+    });
     searched = true;
-
     console.log('dco', query);
     if (query) {
-        
-        console.log('refresh',refresh, !refresh);
+    console.log('refresh', refresh, !refresh);
         if (!refresh) {
             refreshFunc();
         }
-        search(query,pageCount);
+        search(query, pageCount);
     }
 }
 async function search(query, pageCount) {
     // document.getElementById('containerData').innerHTML=""
     var container = document.getElementById('imgList');
-    container.innerHTML=""
     const loader = document.querySelector('#demo');
     const skeleton = document.querySelector('#skeleton-loader');
     try {
         skeleton.style.display = 'block';
         loader.appendChild(skeleton);
         var apiData = await getData(query, pageCount);
-         apiDataArticle = apiData
+        apiDataArticle = apiData
         apiRequesting = false;
         skeleton.style.display = 'none';
         loader.style.display = 'none';
@@ -81,9 +78,9 @@ async function search(query, pageCount) {
                 }
                 else {
                     // var image = document.createElement('image');
-                image.src = 'http://static1.squarespace.com/static/582f2a75414fb5c5d7172211/t/5ba29eacb8a045e82a32378a/1537384155646/blank-thumbnail.jpg?format=1500w';
-                image.width = 100
-                image.height = 50
+                    image.src = 'http://static1.squarespace.com/static/582f2a75414fb5c5d7172211/t/5ba29eacb8a045e82a32378a/1537384155646/blank-thumbnail.jpg?format=1500w';
+                    image.width = 100
+                    image.height = 50
                 }
                 row.appendChild(image);
                 row.appendChild(text);
@@ -103,43 +100,25 @@ async function getData(query, pageCount) {
         apiRequesting = true;
         var apiData = await fetch(`https://newsapi.org/v2/everything?q=${query}&apiKey=44c1f90dde454be693c048b711c354dc&pageSize=10&page=${pageCount}`)
         return apiData.json();
-        
+
     } catch (err) {
         console.log('Error in api request', err);
     }
 }
-
-function getDocHeight() {
-    var D = document;
-    return Math.max(
-        D.body.scrollHeight, D.documentElement.scrollHeight,
-        D.body.offsetHeight, D.documentElement.offsetHeight,
-        D.body.clientHeight, D.documentElement.clientHeight
-    )
-}
-
-function percentageScrolled() {
-    var winheight = window.innerHeight || (document.documentElement || document.body).clientHeight
-    var docheight = getDocHeight()
-    var scrollTop = window.pageYOffset || (document.documentElement || document.body.parentNode || document.body).scrollTop
-    var trackLength = docheight - winheight
-    var pctScrolled = Math.floor(scrollTop / trackLength * 100) // gets percentage scrolled (ie: 80 or NaN if tracklength == 0)
-    return pctScrolled;
-}
-
-function onScroll() {
-    refresh = false;
-    clearInterval(window.interval);
-    percentageScrolled();
-    if (searched && !apiRequesting && percentageScrolled() > 85) {
-        pageCount++;
-        console.log('onscroll',pageCount);
-        createQuery();
+var debounce_timer;
+let onScroll = window.onscroll = function () {
+    if (debounce_timer) {
+        window.clearTimeout(debounce_timer);
     }
-}
 
+    debounce_timer = window.setTimeout(function () {
+        // run your actual function here
+        pageCount++;
+        createQuery();
+        console.log('onscroll', pageCount);
+    }, 1000);
+};
 window.addEventListener('scroll', onScroll);
-
 window.addEventListener('load', function () {
     let skeleton = document.querySelector('#skeleton-loader');
     console.log(skeleton);

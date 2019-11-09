@@ -26,6 +26,7 @@ function countdown() {
 function searchFun() {
    const query = document.getElementById('searchInput').value
     if (query){
+        document.getElementById('row').innerHTML=""
         if (!refresh) {
             refreshFunc();
         }
@@ -37,9 +38,8 @@ async function search(query,pageCount){
     if (apiData.articles) {
         searched = true
         console.log('check data ',apiData.articles);
-        
         apiData.articles.map((item,index)=>{
-            console.log('hhhhhhhhhhhhh',item.title);
+            console.log('check data',item.title);
             let src
             if(item.urlToImage !== null){
                 src =item.urlToImage
@@ -68,7 +68,7 @@ let onScroll = window.onscroll = function () {
     debounce_timer = window.setTimeout(function () {
         refresh = false
         pageCount++;
-        searchFun();
+        search();
         console.log('onscroll', pageCount);
     }, 1000);
 };

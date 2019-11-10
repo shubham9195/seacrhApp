@@ -18,9 +18,6 @@ function countdown() {
     } else if(searched){
         elem.innerHTML = timeLeft + ' seconds remaining';
         timeLeft--;
-        if (timeLeft == 0) {
-            timeLeft = 30;
-        }
     }
 }
 function searchFun() {
@@ -36,6 +33,7 @@ function searchFun() {
 async function search(query,pageCount){
     var apiData = await getData(query, pageCount);
     if (apiData.articles) {
+        timeLeft = 30
         searched = true
         console.log('check data ',apiData.articles);
         apiData.articles.map((item,index)=>{

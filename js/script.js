@@ -10,28 +10,23 @@ function refreshFunc(stop) {
         refresh = true;
         searchFun();
     }, 30000);
-    window.interval = interval;
-    
 }
 function countdown() {
     if (timeLeft == -1) {
         clearTimeout(timerId);
-        searchFun();
+        refreshFunc();
     } else if (searched) {
         elem.innerHTML = timeLeft + ' seconds remaining';
         timeLeft--;
     }
 }
 function searchFun() {
-    clearInterval(interval);
+    clearInterval(interval)
     timeLeft = 30;
-    countdown()
     const query = document.getElementById('searchInput').value
     if (query) {
         document.getElementById('row').innerHTML = "";
-        if (!refresh) {
             refreshFunc();
-        }
         search(query, pageCount)
     }
 }

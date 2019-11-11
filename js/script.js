@@ -15,39 +15,39 @@ function countdown() {
     if (timeLeft == -1) {
         clearTimeout(timerId);
         searchFun();
-    } else if(searched){
+    } else if (searched) {
         elem.innerHTML = timeLeft + ' seconds remaining';
         timeLeft--;
     }
 }
 function searchFun() {
-   const query = document.getElementById('searchInput').value
-    if (query){
-        document.getElementById('row').innerHTML=""
+    timeLeft = 30;
+    const query = document.getElementById('searchInput').value
+    if (query) {
+        document.getElementById('row').innerHTML = ""
         if (!refresh) {
             refreshFunc();
         }
-        search(query,pageCount)
+        search(query, pageCount)
     }
 }
-async function search(query,pageCount){
+async function search(query, pageCount) {
     var apiData = await getData(query, pageCount);
     if (apiData.articles) {
-        timeLeft = 30
         searched = true
-        console.log('check data ',apiData.articles);
-        apiData.articles.map((item,index)=>{
-            console.log('check data',item.title);
+        console.log('check data ', apiData.articles);
+        apiData.articles.map((item, index) => {
+            console.log('check data', item.title);
             let src
-            if(item.urlToImage !== null){
-                src =item.urlToImage
+            if (item.urlToImage !== null) {
+                src = item.urlToImage
             }
-            else{
+            else {
                 src = 'http://static1.squarespace.com/static/582f2a75414fb5c5d7172211/t/5ba29eacb8a045e82a32378a/1537384155646/blank-thumbnail.jpg?format=1500w';
             }
-            document.getElementById('row').innerHTML+=`<div class="column" id="imgList"><img src=${src} width="100" height="50"/><p class="description"><a target="_blank" class= "link" href=${item.url}>${item.title}</a></p></div>`
+            document.getElementById('row').innerHTML += `<div class="column" id="imgList"><img src=${src} width="100" height="50"/><p class="description"><a target="_blank" class= "link" href=${item.url}>${item.title}</a></p></div>`
         })
-        
+
     }
 }
 async function getData(query, pageCount) {

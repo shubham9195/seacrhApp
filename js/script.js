@@ -4,12 +4,14 @@ var elem = document.getElementById('timer');
 var timerId = setInterval(countdown, 1000);
 let searched;
 let refresh;
+var interval
 function refreshFunc(stop) {
-    const interval = setInterval(() => {
+     interval = setInterval(() => {
         refresh = true;
         searchFun();
     }, 30000);
     window.interval = interval;
+    
 }
 function countdown() {
     if (timeLeft == -1) {
@@ -21,10 +23,12 @@ function countdown() {
     }
 }
 function searchFun() {
+    clearInterval(interval);
     timeLeft = 30;
+    countdown()
     const query = document.getElementById('searchInput').value
     if (query) {
-        document.getElementById('row').innerHTML = ""
+        document.getElementById('row').innerHTML = "";
         if (!refresh) {
             refreshFunc();
         }
